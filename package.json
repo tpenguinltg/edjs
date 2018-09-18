@@ -1,0 +1,28 @@
+{
+  "name": "edjs",
+  "version": "1.0.0",
+  "description": "An ed(1) clone",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha --recursive test",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpenguinltg/edjs.git"
+  },
+  "keywords": [
+    "ed",
+    "editor"
+  ],
+  "author": "tPenguinLTG",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tpenguinltg/edjs/issues"
+  },
+  "homepage": "https://github.com/tpenguinltg/edjs#readme",
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^5.2.0"
+  }
+}
