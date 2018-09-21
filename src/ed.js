@@ -1,4 +1,6 @@
 class Ed {
+  *run() {
+  }
 }
 
 if (typeof module !== "undefined")
