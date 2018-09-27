@@ -21,8 +21,8 @@ describe("Ed", () => {
     describe("unknown", () => {
       it("should return '?' and wait for more input", () => {
         const instance = ed.run();
-
         instance.next();
+
         const iteration = instance.next("notacommand");
 
         assert.equal(iteration.value, "?\n");
@@ -33,8 +33,8 @@ describe("Ed", () => {
     describe("Q", () => {
       it("should quit", () => {
         const instance = ed.run();
-
         instance.next();
+
         const iteration = instance.next("Q");
 
         assert.ok(iteration.done, "The generator should be done.");
