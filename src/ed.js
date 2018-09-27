@@ -5,6 +5,7 @@ class Ed {
 
     while (typeof (input = yield output) == "string") {
       switch (input) {
+        case "q":
         case "Q":
           return 0;
         default:
