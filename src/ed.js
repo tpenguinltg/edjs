@@ -4,7 +4,12 @@ class Ed {
     let output = "";
 
     while (typeof (input = yield output) == "string") {
-      output = "?\n";
+      switch (input) {
+        case "Q":
+          return 0;
+        default:
+          output = "?\n";
+      }
     }
   }
 }

@@ -29,5 +29,16 @@ describe("Ed", () => {
         assert.ok(!iteration.done);
       });
     });
+
+    describe("Q", () => {
+      it("should quit", () => {
+        const instance = ed.run();
+
+        instance.next();
+        const iteration = instance.next("Q");
+
+        assert.ok(iteration.done, "The generator should be done.");
+      });
+    });
   });
 });
