@@ -64,6 +64,16 @@ describe("Ed", () => {
 				assert.ok(!iteration.done);
 			});
 
+			it("should set the last error to UNKNOWN_COMMAND", () => {
+				const instance = ed.run();
+				instance.next();
+
+				const iteration = instance.next("notacommand");
+
+				assert.equal(ed.error, ed.errors.UNKNOWN_COMMAND);
+			});
+		});
+
 		describe("P", () => {
 			it("should show prompt if prompt is disabled", () => {
 				const instance = ed.run();

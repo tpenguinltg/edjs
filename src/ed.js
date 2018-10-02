@@ -23,10 +23,15 @@ class Ed {
 					return 0;
 				default:
 					output = "?\n";
+					this.error = this.errors.UNKNOWN_COMMAND;
 			}
 		}
 	}
 }
+
+Ed.prototype.errors = {
+	UNKNOWN_COMMAND: "unknown command",
+};
 
 if (typeof module !== "undefined")
 	module.exports = Ed;
