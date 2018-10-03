@@ -117,6 +117,25 @@ describe("Ed", () => {
 
 				assert.ok(iteration.done, "The generator should be done.");
 			});
+
+			it("should quit with success if there was no error", () => {
+				const instance = ed.run();
+				instance.next();
+
+				const iteration = instance.next("q");
+
+				assert.ok(iteration.value);
+			});
+
+			it("should quit with failure if there was an error", () => {
+				const instance = ed.run();
+				instance.next();
+				ed.error = "SOME ERROR";
+
+				const iteration = instance.next("q");
+
+				assert.ok(!iteration.value);
+			});
 		});
 
 		describe("Q", () => {
@@ -127,6 +146,25 @@ describe("Ed", () => {
 				const iteration = instance.next("Q");
 
 				assert.ok(iteration.done, "The generator should be done.");
+			});
+
+			it("should quit with success if there was no error", () => {
+				const instance = ed.run();
+				instance.next();
+
+				const iteration = instance.next("Q");
+
+				assert.ok(iteration.value);
+			});
+
+			it("should quit with failure if there was an error", () => {
+				const instance = ed.run();
+				instance.next();
+				ed.error = "SOME ERROR";
+
+				const iteration = instance.next("Q");
+
+				assert.ok(!iteration.value);
 			});
 		});
 	});

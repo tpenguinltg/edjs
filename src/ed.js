@@ -23,7 +23,7 @@ class Ed {
 					break;
 				case "q":
 				case "Q":
-					return 0;
+					return !this.error;
 				default:
 					output = "?\n";
 					this.error = this.errors.UNKNOWN_COMMAND;
