@@ -11,7 +11,7 @@ instance.next();
 readline.on("line", (line) => {
   const iteration = instance.next(line);
   if (iteration.done) {
-    process.exit(iteration.value);
+    process.exit(!iteration.value);
   } else {
     process.stdout.write(iteration.value);
   }
