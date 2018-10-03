@@ -85,6 +85,15 @@ describe("Ed", () => {
 
 				assert.equal(iteration.value, error + "\n");
 			});
+
+			it("should not print anything if there has not been an error", () => {
+				const instance = ed.run();
+				instance.next();
+
+				const iteration = instance.next("h");
+
+				assert.equal(iteration.value, "");
+			});
 		});
 
 		describe("P", () => {

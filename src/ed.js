@@ -16,7 +16,8 @@ class Ed {
 			output = "";
 			switch (input) {
 				case "h":
-					output = this.error + "\n";
+					if (this.error)
+						output = this.error + "\n";
 					break;
 				case "P":
 					this.showPrompt = !this.showPrompt;
