@@ -15,6 +15,9 @@ class Ed {
 		while (typeof (input = yield (output + this.prompt)) == "string") {
 			output = "";
 			switch (input) {
+				case "h":
+					output = this.error + "\n";
+					break;
 				case "P":
 					this.showPrompt = !this.showPrompt;
 					break;

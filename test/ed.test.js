@@ -74,6 +74,19 @@ describe("Ed", () => {
 			});
 		});
 
+		describe("h", () => {
+			it("should print the last error", () => {
+				const instance = ed.run();
+				const error = "SOME ERROR";
+
+				instance.next();
+				ed.error = error;
+				const iteration = instance.next("h");
+
+				assert.equal(iteration.value, error + "\n");
+			});
+		});
+
 		describe("P", () => {
 			it("should show prompt if prompt is disabled", () => {
 				const instance = ed.run();
