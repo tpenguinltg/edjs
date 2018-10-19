@@ -70,7 +70,7 @@ describe("Ed", () => {
 
 				const iteration = instance.next("notacommand");
 
-				assert.equal(ed.error, ed.errors.UNKNOWN_COMMAND);
+				assert.equal(ed.lastError, ed.errors.UNKNOWN_COMMAND);
 			});
 		});
 
@@ -80,7 +80,7 @@ describe("Ed", () => {
 				const error = "SOME ERROR";
 
 				instance.next();
-				ed.error = error;
+				ed.lastError = error;
 				const iteration = instance.next("h");
 
 				assert.equal(iteration.value, error + "\n");
@@ -93,6 +93,65 @@ describe("Ed", () => {
 				const iteration = instance.next("h");
 
 				assert.equal(iteration.value, "");
+			});
+		});
+
+		describe("H", () => {
+			it("should cause errors to print automatically", () => {
+				const instance = ed.run();
+				instance.next();
+
+				instance.next("H");
+				const iteration = instance.next(")");
+
+				assert.equal(iteration.value, `?\n${ed.errors.UNKNOWN_COMMAND}\n`);
+			});
+
+			it("should toggle verbose errors", () => {
+				const instance = ed.run();
+				instance.next();
+
+				instance.next("H");
+				instance.next(")");
+				instance.next("H");
+				const iteration = instance.next(")");
+
+				assert.equal(iteration.value, "?\n");
+			});
+
+			it("should print the last error on enable", () => {
+				const instance = ed.run();
+				instance.next();
+
+				instance.next(")");
+				const iteration = instance.next("H");
+
+				assert.equal(
+					iteration.value,
+					`${ed.errors.UNKNOWN_COMMAND}\n`
+				);
+			});
+
+			it("should not print the last error on disable", () => {
+				const instance = ed.run();
+				instance.next();
+
+				instance.next(")");
+				instance.next("H");
+				const iteration = instance.next("H");
+
+				assert.equal(iteration.value, "");
+			});
+
+			it("should not print error when the last command succeeded", () => {
+				const instance = ed.run();
+				instance.next();
+
+				instance.next(")");
+				instance.next("H");
+				const iteration = instance.next("P");
+
+				assert.equal(iteration.value, ed.prompt);
 			});
 		});
 
@@ -139,7 +198,7 @@ describe("Ed", () => {
 			it("should quit with failure if there was an error", () => {
 				const instance = ed.run();
 				instance.next();
-				ed.error = "SOME ERROR";
+				ed.lastError = "SOME ERROR";
 
 				const iteration = instance.next("q");
 
@@ -169,8 +228,7 @@ describe("Ed", () => {
 			it("should quit with failure if there was an error", () => {
 				const instance = ed.run();
 				instance.next();
-				ed.error = "SOME ERROR";
-
+				ed.lastError = "SOME ERROR";
 				const iteration = instance.next("Q");
 
 				assert.ok(!iteration.value);
