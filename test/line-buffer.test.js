@@ -11,3 +11,19 @@ describe("LineBuffer", () => {
 		});
 	});
 });
+
+describe("Line", () => {
+	it("should contain expected properties", () => {
+		const contents = "contents";
+		const previous = {a: "b"};
+		const next = {c: "d"};
+		const mark = "z";
+
+		const line = new LineBuffer.Line(contents, previous, next, mark);
+
+		assert.equal(line.contents, contents);
+		assert.equal(line.previous, previous);
+		assert.equal(line.next, next);
+		assert.equal(line.mark, mark);
+	});
+});
