@@ -26,4 +26,13 @@ describe("Line", () => {
 		assert.equal(line.next, next);
 		assert.equal(line.mark, mark);
 	});
+
+	describe("toString", () => {
+		it("should return the contents", () => {
+			const contents = "contents";
+			const line = new LineBuffer.Line(contents);
+
+			assert.equal(line.toString(), contents);
+		});
+	});
 });

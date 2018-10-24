@@ -15,6 +15,10 @@ LineBuffer.Line = class {
 		this.next = next;
 		this.mark = mark;
 	}
+
+	toString() {
+		return this.contents.toString();
+	}
 };
 
 if (typeof module !== "undefined")
