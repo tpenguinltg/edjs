@@ -2,10 +2,14 @@
   "name": "edjs",
   "version": "1.0.0",
   "description": "An ed(1) clone",
-  "main": "main.js",
+  "main": "src/ed.js",
   "scripts": {
+    "start": "$npm_package_bin_edjs",
     "test": "mocha --recursive test",
     "test:watch": "npm run test -- --watch"
+  },
+  "bin": {
+    "edjs": "./cli.js"
   },
   "repository": {
     "type": "git",
