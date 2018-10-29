@@ -1,10 +1,23 @@
 class LineBuffer {
 	constructor(contents) {
-		this.contents = contents;
+		this.contents = contents
+			.split("\n")
+			.map((line) => new LineBuffer.Line(line));
+
+		this.relinkLines(this.contents);
+	}
+
+	relinkLines(buffer) {
+		buffer.forEach((line, i) => {
+			line.previous = buffer[i - 1];
+			line.next = buffer[i + 1];
+		});
 	}
 
 	toString() {
-		return this.contents;
+		return this.contents
+			.map((line) => line.toString())
+			.join("\n");
 	}
 }
 
