@@ -22,11 +22,11 @@ class LineBuffer {
 }
 
 LineBuffer.Line = class {
-	constructor(contents, previous, next, mark) {
+	constructor(contents, previous, next, marks) {
 		this.contents = contents;
 		this.previous = previous;
 		this.next = next;
-		this.mark = mark;
+		this.marks = new Set(marks);
 	}
 
 	toString() {
