@@ -32,12 +32,12 @@ describe("LineBuffer", () => {
 			LineBuffer.prototype.relinkLines(lines);
 
 			[
-				[lines[0].previous, undefined],
+				[lines[0].previous, null],
 				[lines[0].next, lines[1]],
 				[lines[1].previous, lines[0]],
 				[lines[1].next, lines[2]],
 				[lines[2].previous, lines[1]],
-				[lines[2].next, undefined],
+				[lines[2].next, null],
 			].forEach((args) => void assert.equal(...args));
 		});
 	});
@@ -66,6 +66,15 @@ describe("Line", () => {
 		assert.equal(line.next, next);
 		assert(marks.every((m) => line.marks.has(m)));
 	});
+
+		it("should provide defaults", () => {
+			const line = new LineBuffer.Line();
+
+			assert.equal(line.contents, undefined);
+			assert.equal(line.previous, null);
+			assert.equal(line.next, null);
+			assert.equal(line.marks.size, 0);
+		});
 
 	describe("toString", () => {
 		it("should return the contents", () => {

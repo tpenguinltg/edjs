@@ -12,6 +12,7 @@ class LineBuffer {
 			line.previous = buffer[i - 1];
 			line.next = buffer[i + 1];
 		});
+		buffer[0].previous = buffer[buffer.length - 1].next = null;
 	}
 
 	toString() {
@@ -22,7 +23,7 @@ class LineBuffer {
 }
 
 LineBuffer.Line = class {
-	constructor(contents, previous, next, marks) {
+	constructor(contents, previous = null, next = null, marks) {
 		this.contents = contents;
 		this.previous = previous;
 		this.next = next;
