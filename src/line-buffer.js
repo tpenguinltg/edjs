@@ -7,17 +7,16 @@ class LineBuffer {
 		this.relinkLines(this.contents);
 	}
 
-	link(before, after) {
+	static link(before, after) {
 		if (before) before.next = after;
 		if (after) after.previous = before;
 	}
 
 	relinkLines(buffer) {
-		buffer.forEach((line, i) => {
-			line.previous = buffer[i - 1];
-			line.next = buffer[i + 1];
+		buffer.reduce((previous, current) => {
+			LineBuffer.link(previous, current);
+			return current;
 		});
-		buffer[0].previous = buffer[buffer.length - 1].next = null;
 	}
 
 	toString() {

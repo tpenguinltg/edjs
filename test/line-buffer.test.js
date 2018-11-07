@@ -26,7 +26,7 @@ describe("LineBuffer", () => {
 			const line1 = new LineBuffer.Line("line1");
 			const line2 = new LineBuffer.Line("line2");
 
-			LineBuffer.prototype.link(line1, line2);
+			LineBuffer.link(line1, line2);
 
 			assert.equal(line1.next, line2);
 			assert.equal(line2.previous, line1);
@@ -36,7 +36,7 @@ describe("LineBuffer", () => {
 			const line = new LineBuffer.Line("line");
 			line.previous = {};
 
-			LineBuffer.prototype.link(line, null);
+			LineBuffer.link(line, null);
 
 			assert.equal(line.next, null);
 		});
@@ -45,13 +45,13 @@ describe("LineBuffer", () => {
 			const line = new LineBuffer.Line("line");
 			line.next = {};
 
-			LineBuffer.prototype.link(null, line);
+			LineBuffer.link(null, line);
 
 			assert.equal(line.previous, null);
 		});
 
 		it("should do nothing on two nulls", () => {
-			LineBuffer.prototype.link(null, null);
+			LineBuffer.link(null, null);
 		});
 	});
 
