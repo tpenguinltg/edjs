@@ -7,6 +7,11 @@ class LineBuffer {
 		this.relinkLines(this.contents);
 	}
 
+	link(before, after) {
+		if (before) before.next = after;
+		if (after) after.previous = before;
+	}
+
 	relinkLines(buffer) {
 		buffer.forEach((line, i) => {
 			line.previous = buffer[i - 1];

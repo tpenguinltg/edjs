@@ -21,6 +21,40 @@ describe("LineBuffer", () => {
 		});
 	});
 
+	describe("link", () => {
+		it("should link two lines", () => {
+			const line1 = new LineBuffer.Line("line1");
+			const line2 = new LineBuffer.Line("line2");
+
+			LineBuffer.prototype.link(line1, line2);
+
+			assert.equal(line1.next, line2);
+			assert.equal(line2.previous, line1);
+		});
+
+		it("should link with null on the right", () => {
+			const line = new LineBuffer.Line("line");
+			line.previous = {};
+
+			LineBuffer.prototype.link(line, null);
+
+			assert.equal(line.next, null);
+		});
+
+		it("should link with null on the left", () => {
+			const line = new LineBuffer.Line("line");
+			line.next = {};
+
+			LineBuffer.prototype.link(null, line);
+
+			assert.equal(line.previous, null);
+		});
+
+		it("should do nothing on two nulls", () => {
+			LineBuffer.prototype.link(null, null);
+		});
+	});
+
 	describe("relinkLines", () => {
 		it("should create a doubly linked list of lines", () => {
 			const lines = [
