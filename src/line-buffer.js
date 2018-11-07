@@ -4,7 +4,7 @@ class LineBuffer {
 			.split("\n")
 			.map((line) => new LineBuffer.Line(line));
 
-		this.relinkLines(this.contents);
+		LineBuffer.linkAll(this.contents);
 	}
 
 	static link(before, after) {
@@ -12,7 +12,7 @@ class LineBuffer {
 		if (after) after.previous = before;
 	}
 
-	relinkLines(buffer) {
+	static linkAll(buffer) {
 		buffer.reduce((previous, current) => {
 			LineBuffer.link(previous, current);
 			return current;

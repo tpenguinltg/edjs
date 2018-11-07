@@ -55,7 +55,7 @@ describe("LineBuffer", () => {
 		});
 	});
 
-	describe("relinkLines", () => {
+	describe("linkAll", () => {
 		it("should create a doubly linked list of lines", () => {
 			const lines = [
 				new LineBuffer.Line("a"),
@@ -63,7 +63,7 @@ describe("LineBuffer", () => {
 				new LineBuffer.Line("c"),
 			];
 
-			LineBuffer.prototype.relinkLines(lines);
+			LineBuffer.linkAll(lines);
 
 			[
 				[lines[0].previous, null],
