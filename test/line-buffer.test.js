@@ -53,19 +53,20 @@ describe("LineBuffer", () => {
 });
 
 describe("Line", () => {
-	it("should contain expected properties", () => {
-		const contents = "contents";
-		const previous = {a: "b"};
-		const next = {c: "d"};
-		const marks = ["a", "z"];
+	describe("constructor", () => {
+		it("should set expected properties", () => {
+			const contents = "contents";
+			const previous = {a: "b"};
+			const next = {c: "d"};
+			const marks = ["a", "z"];
 
-		const line = new LineBuffer.Line(contents, previous, next, marks);
+			const line = new LineBuffer.Line(contents, previous, next, marks);
 
-		assert.equal(line.contents, contents);
-		assert.equal(line.previous, previous);
-		assert.equal(line.next, next);
-		assert(marks.every((m) => line.marks.has(m)));
-	});
+			assert.equal(line.contents, contents);
+			assert.equal(line.previous, previous);
+			assert.equal(line.next, next);
+			assert(marks.every((m) => line.marks.has(m)));
+		});
 
 		it("should provide defaults", () => {
 			const line = new LineBuffer.Line();
@@ -75,6 +76,7 @@ describe("Line", () => {
 			assert.equal(line.next, null);
 			assert.equal(line.marks.size, 0);
 		});
+	});
 
 	describe("toString", () => {
 		it("should return the contents", () => {
