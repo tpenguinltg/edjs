@@ -17,7 +17,6 @@ describe("LineBuffer", () => {
 			assert.deepEqual(lineBuffer.contents, expected);
 			assert.equal(lineBuffer.contents[0].next, lineBuffer.contents[1]);
 			assert.equal(lineBuffer.contents[1].previous, lineBuffer.contents[0]);
-
 		});
 	});
 
@@ -73,6 +72,37 @@ describe("LineBuffer", () => {
 				[lines[2].previous, lines[1]],
 				[lines[2].next, null],
 			].forEach((args) => void assert.equal(...args));
+		});
+
+		it("should return the buffer", () => {
+			const buffer = [
+				new LineBuffer.Line("line1"),
+				new LineBuffer.Line("line2")
+			];
+
+			assert.equal(LineBuffer.linkAll(buffer), buffer);
+		});
+	});
+
+	describe("toLines", () => {
+		it("should return an empty array for no content", () => {
+			assert.deepEqual(LineBuffer.toLines(), []);
+		});
+
+		it("should return a linked Line array representing the contents", () => {
+			const contents = "line1\nline2";
+			const expected = [
+				new LineBuffer.Line("line1"),
+				new LineBuffer.Line("line2"),
+			];
+			expected[0].next = expected[1];
+			expected[1].previous = expected[0];
+
+			const lines = LineBuffer.toLines(contents);
+
+			assert.deepEqual(lines, expected);
+			assert.equal(lines[0].next, lines[1]);
+			assert.equal(lines[1].previous, lines[0]);
 		});
 	});
 

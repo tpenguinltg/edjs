@@ -1,10 +1,6 @@
 class LineBuffer {
 	constructor(contents) {
-		this.contents = contents
-			.split("\n")
-			.map((line) => new LineBuffer.Line(line));
-
-		LineBuffer.linkAll(this.contents);
+		this.contents = LineBuffer.toLines(contents);
 	}
 
 	static link(before, after) {
@@ -17,6 +13,17 @@ class LineBuffer {
 			LineBuffer.link(previous, current);
 			return current;
 		});
+
+		return buffer;
+	}
+
+	static toLines(content) {
+		if (!content) return [];
+
+		else return LineBuffer.linkAll(
+			content.split("\n")
+			       .map((line) => new LineBuffer.Line(line))
+		);
 	}
 
 	toString() {
