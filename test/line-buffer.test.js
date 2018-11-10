@@ -115,6 +115,22 @@ describe("LineBuffer", () => {
 		});
 	});
 
+	describe("insertContents", () => {
+		it("should insert Lines at the start index", () => {
+			const expected = LineBuffer.linkAll([
+				new LineBuffer.Line("line 1"),
+				new LineBuffer.Line("inserted"),
+				new LineBuffer.Line("contents"),
+				new LineBuffer.Line("line 2"),
+			]);
+			const buffer = new LineBuffer("line 1\nline 2");
+
+			buffer.insertContents(1, "inserted\ncontents");
+
+			assert.deepEqual(buffer.contents, expected);
+		});
+	});
+
 	describe("toString", () => {
 		it("should return the string representation of the buffer", () => {
 			const contents = "a\nb";

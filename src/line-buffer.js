@@ -28,6 +28,12 @@ class LineBuffer {
 		return lines;
 	}
 
+	insertContents(index, contents) {
+		const lines = LineBuffer.toLines(contents, false);
+		LineBuffer.linkAll([this.contents[index - 1], ...lines, this.contents[index]]);
+		this.contents.splice(index, 0, ...lines);
+	}
+
 	toString() {
 		return this.contents
 			.map((line) => line.toString())
