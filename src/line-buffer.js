@@ -28,10 +28,14 @@ class LineBuffer {
 		return lines;
 	}
 
-	insertContents(index, contents) {
+	insertContents(startIndex, contents, endIndex = startIndex) {
 		const lines = LineBuffer.toLines(contents, false);
-		LineBuffer.linkAll([this.contents[index - 1], ...lines, this.contents[index]]);
-		this.contents.splice(index, 0, ...lines);
+		LineBuffer.linkAll([
+			this.contents[startIndex - 1],
+			...lines,
+			this.contents[endIndex]
+		]);
+		this.contents.splice(startIndex, endIndex - startIndex, ...lines);
 	}
 
 	toString() {

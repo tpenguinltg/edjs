@@ -129,6 +129,20 @@ describe("LineBuffer", () => {
 
 			assert.deepEqual(buffer.contents, expected);
 		});
+
+		it("should replace Lines between the given indices", () => {
+			const expected = LineBuffer.linkAll([
+				new LineBuffer.Line("line 1"),
+				new LineBuffer.Line("inserted"),
+				new LineBuffer.Line("contents"),
+				new LineBuffer.Line("line 4"),
+			]);
+			const buffer = new LineBuffer("line 1\nline 2\nline 3\nline 4");
+
+			buffer.insertContents(1, "inserted\ncontents", 3);
+
+			assert.deepEqual(buffer.contents, expected);
+		});
 	});
 
 	describe("toString", () => {
