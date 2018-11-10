@@ -104,6 +104,15 @@ describe("LineBuffer", () => {
 			assert.equal(lines[0].next, lines[1]);
 			assert.equal(lines[1].previous, lines[0]);
 		});
+
+		it("should not link Lines if explicitly instructed", () => {
+			const expected = [
+				new LineBuffer.Line("line1"),
+				new LineBuffer.Line("line2"),
+			];
+
+			assert.deepEqual(LineBuffer.toLines("line1\nline2", false), expected);
+		});
 	});
 
 	describe("toString", () => {

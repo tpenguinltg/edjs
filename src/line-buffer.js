@@ -17,13 +17,15 @@ class LineBuffer {
 		return buffer;
 	}
 
-	static toLines(content) {
+	static toLines(content, linkLines = true) {
 		if (!content) return [];
 
-		else return LineBuffer.linkAll(
-			content.split("\n")
-			       .map((line) => new LineBuffer.Line(line))
-		);
+		const lines = content.split("\n")
+		       .map((line) => new LineBuffer.Line(line));
+
+		if (linkLines) LineBuffer.linkAll(lines);
+
+		return lines;
 	}
 
 	toString() {
