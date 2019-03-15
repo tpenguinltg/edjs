@@ -36,9 +36,11 @@ class Ed {
 					error = this.errors.UNKNOWN_COMMAND;
 			}
 
-			if (error) this.lastError = error;
-			if (verbose && error)
-				output += this.lastError + "\n";
+			if (error) {
+				output = "?\n";
+				this.lastError = error;
+				if (verbose) output += error + "\n";
+			}
 		}
 	}
 }
